@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="KonzolDesktopProject.Views.SchoolClassView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:KonzolDesktopProject.Views"
+             xmlns:viewModel="clr-namespace:KonzolDesktopProject.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.DataContext>
+        <viewModel:SchoolClassViewModel />
+    </UserControl.DataContext>
+
+    <Grid>
+        <ListView ItemsSource="{Binding SchoolClasses}" SelectedItem="{Binding SelectedClass}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Class ID" DisplayMemberBinding="{Binding ClassId}" Width="200" />
+                    <GridViewColumn Header="Class Name">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding ClassId, Mode=TwoWay}" Width="150" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Actions">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Mentés" Command="{Binding DataContext.SaveClassCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</UserControl>

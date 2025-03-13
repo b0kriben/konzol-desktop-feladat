@@ -1,0 +1,40 @@
+﻿<Window x:Class="KonzolDesktopProject.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KonzolDesktopProject"
+        xmlns:viewModel="clr-namespace:KonzolDesktopProject.ViewModels"
+        xmlns:view="clr-namespace:KonzolDesktopProject.Views"
+        mc:Ignorable="d"
+        Title="School Classes" Height="350" Width="525">
+
+    <Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModel:ControlPanelViewModel}">
+            <view:ControlPanelView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:SchoolClassViewModel}">
+            <view:SchoolClassView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:StudentViewModel}">
+            <view:StudentView/>
+        </DataTemplate>
+    </Window.Resources>
+
+    <StackPanel>
+        <DockPanel>
+            <Menu>
+                <MenuItem Header="School">
+                    <!--<MenuItem Header="Kontrollpult" Command="{Binding ShowControlPanelViewCommand}" />-->
+                    <MenuItem Header="Osztályok Kezelése" Command="{Binding ShowSchoolClassViewCommand}" />
+                    <!--<MenuItem Header="Diákok Kezelése" Command="{Binding ShowStudentViewCommand}" />-->
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+
+        <ContentControl Content="{Binding CurrentView}" />
+    </StackPanel>
+</Window>
